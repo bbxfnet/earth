@@ -45,6 +45,9 @@
                 <span id="location-close" class="invisible text-button"> ✕ </span>
             </p>
             <p>
+                <span id="location-address"></span>
+            </p>
+            <p>
                 <span id="location-wind"></span>
                 <span id="location-wind-units" class="text-button"></span>
             </p>
@@ -131,10 +134,10 @@
         </div>
     </div>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js" charset="utf-8"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js" charset="utf-8"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.1.0/topojson.min.js" charset="utf-8"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.10/d3.min.js" charset="utf-8"></script>
+    <script src="/libs/underscore.js/1.6.0/underscore-min.js" charset="utf-8"></script>
+    <script src="/libs/backbone.js/1.1.0/backbone-min.js" charset="utf-8"></script>
+    <script src="/libs/topojson/1.1.0/topojson.min.js" charset="utf-8"></script>
+    <script src="/libs/d3/3.3.10/d3.min.js" charset="utf-8"></script>
 
 <!--
     <script src="/libs/underscore.js/1.6.0/underscore.js" charset="utf-8"></script>
@@ -152,5 +155,12 @@
     <script src="/libs/earth/1.0.0/products.js" charset="utf-8"></script>
     <script src="/libs/earth/1.0.0/earth.js" charset="utf-8"></script>
 
+    <script>
+    function renderReverse(json){
+        if(json != undefined && json.result != undefined && json.result.formatted_address != undefined){
+            document.getElementById("location-address").innerText=json.result.formatted_address;
+        }
+    }
+    </script>
 </body>
 </html>

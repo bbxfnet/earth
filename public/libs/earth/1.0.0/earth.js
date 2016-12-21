@@ -220,12 +220,24 @@
             var coastHi = topojson.feature(topo, µ.isMobile() ? o.coastline_110m : o.coastline_50m);
             var lakesLo = topojson.feature(topo, µ.isMobile() ? o.lakes_tiny : o.lakes_110m);
             var lakesHi = topojson.feature(topo, µ.isMobile() ? o.lakes_110m : o.lakes_50m);
+            var riversLo = topojson.feature(topo, o.ne_110m_rivers_lake_centerlines);
+            var riversHi = topojson.feature(topo, o.ne_50m_rivers_lake_centerlines);
+            var oceanLo = topojson.feature(topo, o.ne_110m_populated_places);
+            var oceanHi = topojson.feature(topo, o.ne_50m_populated_places);
+            var regionPointsLo = topojson.feature(topo, o.ne_110m_admin_0_countries);
+            var regionPointsHi = topojson.feature(topo, o.ne_50m_admin_0_countries);
             log.timeEnd("building meshes");
             return {
                 coastLo: coastLo,
                 coastHi: coastHi,
                 lakesLo: lakesLo,
-                lakesHi: lakesHi
+                lakesHi: lakesHi,
+                riversLo: riversLo,
+                riversHi: riversHi,
+                oceanLo: oceanLo,
+                oceanHi: oceanHi,
+                regionPointsLo: regionPointsLo,
+                regionPointsHi: regionPointsHi
             };
         });
     }
@@ -299,6 +311,9 @@
         var path = d3.geo.path().projection(globe.projection).pointRadius(7);
         var coastline = d3.select(".coastline");
         var lakes = d3.select(".lakes");
+        var rivers = d3.select(".rivers");
+        var ocean = d3.select(".ocean");
+        var regionPoints = d3.select(".regionPoints");
         d3.selectAll("path").attr("d", path);  // do an initial draw -- fixes issue with safari
 
         function drawLocationMark(point, coord) {
@@ -338,6 +353,9 @@
                 moveStart: function() {
                     coastline.datum(mesh.coastLo);
                     lakes.datum(mesh.lakesLo);
+                    rivers.datum(mesh.riversLo);
+                    ocean.datum(mesh.oceanLo);
+                    regionPoints.datum(mesh.regionPointsLo);
                     rendererAgent.trigger("start");
                 },
                 move: function() {
@@ -346,6 +364,9 @@
                 moveEnd: function() {
                     coastline.datum(mesh.coastHi);
                     lakes.datum(mesh.lakesHi);
+                    rivers.datum(mesh.riversHi);
+                    ocean.datum(mesh.oceanHi);
+                    regionPoints.datum(mesh.regionPointsHi);
                     d3.selectAll("path").attr("d", path);
                     rendererAgent.trigger("render");
                 },
@@ -805,6 +826,11 @@
         if (_.isFinite(λ) && _.isFinite(φ)) {
             d3.select("#location-coord").text(µ.formatCoordinates(λ, φ));
             d3.select("#location-close").classed("invisible", false);
+            
+            var appurl="http://api.map.baidu.com/geocoder/v2/?callback=renderReverse&location="+φ+","+λ+"&output=json&ak=6ebac48a8cb983c71dda88f178ad6f22";
+            var script = document.createElement('script');
+            script.setAttribute('src', appurl);
+            document.getElementsByTagName('head')[0].appendChild(script);   
         }
 
         if (field.isDefined(point[0], point[1]) && grids) {

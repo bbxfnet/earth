@@ -5,3 +5,5 @@ target
 scratch
 private
 *.iml
+*.out
+public/data/weather/2016

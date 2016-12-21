@@ -203,13 +203,17 @@ body {
  * SVG Element Styling
  **************************************************************************************************/
 
-.coastline, .lakes {
+.coastline, .lakes, .rivers, .ocean, .regionPoints {
     stroke: #ffffff;
     stroke-width: 1.25;
     fill: none;
 }
 
-.firefox .coastline, .firefox .lakes {
+.rivers {
+    stroke: #ffff00;
+}
+
+.firefox .coastline, .firefox .lakes, .firefox .rivers, .firefox .ocean, .firefox .regionPoints {
     stroke-width: 1.0;
 }
 
