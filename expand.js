@@ -29,6 +29,7 @@ var templates = [
 
 var languages = [
     {code: "en", target: "public"},
+    {code: "zh", target: "public/zh"},
     {code: "ja", target: "public/jp"}  // *lang* code for Japanese is JA not JP. Too late now. Site already public.
 ];
 

@@ -45,6 +45,9 @@
                 <span id="location-close" class="invisible text-button"> ✕ </span>
             </p>
             <p>
+                <span id="location-address"></span>
+            </p>
+            <p>
                 <span id="location-wind"></span>
                 <span id="location-wind-units" class="text-button"></span>
             </p>
@@ -77,31 +80,31 @@
                 class="text-button" id="option-show-grid" title="Toggle Grid">グリッド</span>
             </p>
             <p>モード | <span
-                class="text-button" id="wind-mode-enable">大気圏</span> – <span
-                class="text-button" id="ocean-mode-enable">海</span>
+                class="text-button" id="wind-mode-enable">大気圏</span><!-- – <span
+                class="text-button" id="ocean-mode-enable">海</span>-->
             </p>
-            <p class="wind-mode">高度 | <span
-                class="surface text-button" id="surface-level" title="地上">地上</span> – <span
-                class="surface text-button" id="isobaric-1000hPa">1000</span> – <span
+            <p class="wind-mode">高度 | <!--<span
+                class="surface text-button" id="surface-level" title="地上">地上</span> – --><span
+                class="surface text-button" id="isobaric-1000hPa">1000</span> <!--– <span
                 class="surface text-button" id="isobaric-850hPa">850</span> – <span
                 class="surface text-button" id="isobaric-700hPa">700</span> – <span
                 class="surface text-button" id="isobaric-500hPa">500</span> – <span
                 class="surface text-button" id="isobaric-250hPa">250</span> – <span
                 class="surface text-button" id="isobaric-70hPa">70</span> – <span
-                class="surface text-button" id="isobaric-10hPa">10</span> hPa
+                class="surface text-button" id="isobaric-10hPa">10</span> hPa-->
             </p>
             <p class="wind-mode">レイヤー | <span
                 class="text-button" id="overlay-off">無</span> – <span
                 class="text-button" id="overlay-wind" title="風速">風速</span> – <span
                 class="text-button" id="overlay-temp" title="気温">気温</span> – <span
-                class="text-button" id="overlay-relative_humidity" title="相対湿度">相対湿度</span> – <span
+                class="text-button" id="overlay-relative_humidity" title="相対湿度">相対湿度</span><!-- – <span
                 class="text-button" id="overlay-air_density" title="空気密度">空気密度</span> – <span
-                class="text-button" id="overlay-wind_power_density" title="風力エネルギー密度">WPD</span>
+                class="text-button" id="overlay-wind_power_density" title="風力エネルギー密度">WPD</span>-->
             </p>
             <p class="wind-mode"><span style="visibility:hidden">レイヤー</span> | <span
                 class="text-button" id="overlay-total_precipitable_water" title="可降水量">可降水量</span> – <span
-                class="text-button" id="overlay-total_cloud_water" title="雲水量">雲水量</span> – <span
-                class="text-button" id="overlay-mean_sea_level_pressure" title="海面更正気圧">海面更正</span>
+                class="text-button" id="overlay-total_cloud_water" title="雲水量">雲水量</span><!-- – <span
+                class="text-button" id="overlay-mean_sea_level_pressure" title="海面更正気圧">海面更正</span>-->
             </p>
             <p class="ocean-mode invisible">動画 | <span
                 class="text-button" id="animate-currents" title="海流">海流</span>
@@ -122,7 +125,7 @@
                 class="proj text-button" id="winkel3" title="ヴィンケル第3">W3</span>
             </p>
             <!--<p>免責事項 | 正確な情報を提供するためのものではありません</p>-->
-            <p id="lang"><a href="/" class="internal-link">English</a></p>
+            <p id="lang"><a href="/" class="internal-link">中文</a></p>
             <p>
                 <a href="about.html" class="internal-link">サイトについて</a>
                 <a href="https://www.facebook.com/EarthWindMap" class="social-icon" title="Facebook">&#xe027;</a>
@@ -131,10 +134,10 @@
         </div>
     </div>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js" charset="utf-8"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js" charset="utf-8"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.1.0/topojson.min.js" charset="utf-8"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.10/d3.min.js" charset="utf-8"></script>
+    <script src="/libs/underscore.js/1.6.0/underscore-min.js" charset="utf-8"></script>
+    <script src="/libs/backbone.js/1.1.0/backbone-min.js" charset="utf-8"></script>
+    <script src="/libs/topojson/1.1.0/topojson.min.js" charset="utf-8"></script>
+    <script src="/libs/d3/3.3.10/d3.min.js" charset="utf-8"></script>
 
 <!--
     <script src="/libs/underscore.js/1.6.0/underscore.js" charset="utf-8"></script>
@@ -151,6 +154,14 @@
     <script src="/libs/earth/1.0.0/globes.js" charset="utf-8"></script>
     <script src="/libs/earth/1.0.0/products.js" charset="utf-8"></script>
     <script src="/libs/earth/1.0.0/earth.js" charset="utf-8"></script>
+
+    <script>
+    function renderReverse(json){
+        if(json != undefined && json.result != undefined && json.result.formatted_address != undefined){
+            document.getElementById("location-address").innerText=json.result.formatted_address;
+        }
+    }
+    </script>
 
 </body>
 </html>
