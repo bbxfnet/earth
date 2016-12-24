@@ -220,12 +220,12 @@
             var coastHi = topojson.feature(topo, µ.isMobile() ? o.coastline_110m : o.coastline_50m);
             var lakesLo = topojson.feature(topo, µ.isMobile() ? o.lakes_tiny : o.lakes_110m);
             var lakesHi = topojson.feature(topo, µ.isMobile() ? o.lakes_110m : o.lakes_50m);
-            var riversLo = topojson.feature(topo, o.ne_110m_rivers_lake_centerlines);
-            var riversHi = topojson.feature(topo, o.ne_50m_rivers_lake_centerlines);
-            var oceanLo = topojson.feature(topo, o.ne_110m_populated_places);
-            var oceanHi = topojson.feature(topo, o.ne_50m_populated_places);
-            var regionPointsLo = topojson.feature(topo, o.ne_110m_admin_0_countries);
-            var regionPointsHi = topojson.feature(topo, o.ne_50m_admin_0_countries);
+            var riversLo = topojson.feature(topo, µ.isMobile() ? o.ne_tiny_rivers_lake_centerlines : o.ne_110m_rivers_lake_centerlines);
+            var riversHi = topojson.feature(topo, µ.isMobile() ? o.ne_110m_rivers_lake_centerlines : o.ne_50m_rivers_lake_centerlines);
+            var oceanLo = topojson.feature(topo, µ.isMobile() ? o.ne_tiny_populated_places : o.ne_110m_populated_places);
+            var oceanHi = topojson.feature(topo, µ.isMobile() ? o.ne_110m_populated_places : o.ne_50m_populated_places);
+            var regionPointsLo = topojson.feature(topo, µ.isMobile() ? o.ne_tiny_admin_0_countries : o.ne_110m_admin_0_countries);
+            var regionPointsHi = topojson.feature(topo, µ.isMobile() ? o.ne_110m_admin_0_countries : o.ne_50m_admin_0_countries);
             log.timeEnd("building meshes");
             return {
                 coastLo: coastLo,
